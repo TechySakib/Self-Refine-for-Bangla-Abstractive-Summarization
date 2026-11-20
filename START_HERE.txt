@@ -1,0 +1,26 @@
+START HERE — V5
+
+1. Extract this V5 ZIP and open the extracted project folder in VS Code.
+2. Copy only `.env`, `data/raw/`, and `data/processed/` from V4 if you already have them.
+3. Do NOT copy V4 `results/` JSONL files.
+4. Create/activate environment:
+   python -m venv .venv
+   .venv\Scripts\Activate.ps1
+5. Install:
+   pip install -r requirements.txt
+6. Add your API key to `.env` privately.
+7. Run local tests (no API calls):
+   python -m unittest discover -s tests -v
+8. Run one-article smoke test:
+   python scripts/run_experiment.py --split pilot --limit 1 --max-rounds 3
+9. Inspect:
+   python scripts/inspect_v5_results.py --split pilot
+10. If correct, run two-article smoke test:
+    python scripts/run_experiment.py --split pilot --limit 2 --max-rounds 3
+11. Review results/pilot_results.jsonl before the 20-article pilot.
+
+V5 adds a rule-based numerical-qualifier audit and a second-pass model-based
+source-support screen for System C. The latter is not independent ground truth.
+31 words is a review threshold, not a hard cap.
+
+Never share your API key or annotations/admin_only/annotation_key.csv.

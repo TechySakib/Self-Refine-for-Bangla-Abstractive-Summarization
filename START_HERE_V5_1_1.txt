@@ -1,0 +1,24 @@
+BANGla SELF-REFINE — V5.1.1 START HERE
+
+1. Create and activate the virtual environment; install requirements as described in README.md.
+2. Copy .env and data/raw + data/processed from your V5.1 folder. Do not copy old results.
+3. Run local tests:
+   python -m unittest discover -s tests -v
+4. Create conservative cleaned pilot:
+   python scripts/clean_dataset.py --split pilot
+5. Open data/processed/pilot_cleaning_review.csv.
+   For each review row, choose one:
+   - decision=remove_inline_block and enter an exact, unique resume_at phrase;
+   - decision=remove_trailing_block only if all remaining tail text is related links; or
+   - decision=keep with a review_note after manual inspection.
+6. Apply reviewed decisions:
+   python scripts/clean_dataset.py --split pilot --apply-overrides
+   Continue only when unresolved manual-review records = 0.
+7. Audit, run, and evaluate the separate cleaned pilot:
+   python scripts/audit_reference_alignment.py --split pilot_cleaned
+   python scripts/run_experiment.py --split pilot_cleaned --max-rounds 3
+   python scripts/evaluate.py --split pilot_cleaned
+   python scripts/inspect_v51_results.py --split pilot_cleaned
+
+V5.1 prompts and systems A/B/C are unchanged. Prompt version stays v5.1; pipeline version is 5.1.1.
+Read PREPROCESSING_V5_1_1.md before editing the review CSV.

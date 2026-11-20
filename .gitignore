@@ -1,0 +1,13 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+data/raw/*
+data/processed/*
+results/*
+annotations/annotator_*.csv
+annotations/admin_only/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!results/.gitkeep
+!annotations/.gitkeep
